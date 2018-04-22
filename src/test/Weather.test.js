@@ -9,9 +9,22 @@ import Weather from '../components/Weather';
 configure({ adapter: new Adapter() });
 
 describe('<Weather />', () =>{
-  it('renders a div', () => {
+    let city;
+    let country;
+    beforeEach(() => {
+        city = "Paris";
+        country = "FR";
+   });
+
+    it('renders a div', () => {
     const div = shallow(<Weather />);
-    expect(div.find('div')).to.have.length(1);
+    expect(div.find('div.weather__info')).to.have.length(1);
+    });
+    
+    it('renders spans', () => {
+        const spans = shallow(<Weather city={city}
+            country={country} />);
+        expect(spans.find('span.weather__value')).to.have.length(1);
     });
 });
   
