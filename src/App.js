@@ -22,14 +22,26 @@ class App extends Component {
             API_KEY}&units=metric`);
         const data = await api_call.json();
         if (city && country ) {
-            this.setState({
-                temperature: data.main.temp,
-                city: data.name,
-                country: data.sys.country,
-                humidity: data.main.humidity,
-                description: data.weather[0].description,
-                error: ""
-            });
+            if (data.cod == 404) {
+                this.setState({
+                    temperature: undefined,
+                    city: undefined,
+                    country: undefined,
+                    humidity: undefined,
+                    description: undefined,
+                    error: "Input doesn't match any known location!"
+                });
+                
+            } else {
+                this.setState({
+                    temperature: data.main.temp,
+                    city: data.name,
+                    country: data.sys.country,
+                    humidity: data.main.humidity,
+                    description: data.weather[0].description,
+                    error: ""
+                });
+            }
         } else {
             this.setState({
                 temperature: undefined,
