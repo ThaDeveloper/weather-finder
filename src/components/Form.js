@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 // We don't need parenthesis for one argument function
 const Form = props => (
